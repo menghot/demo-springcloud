@@ -1,0 +1,58 @@
+
+server:
+  port: 8080
+
+
+#  foo-service.ribbon.NIWSServerListClassName=com.netflix.loadbalancer.ConfigurationBasedServerList
+#  foo-service.ribbon.listOfServers=localhost:9876
+#spring:
+#  cloud:
+#    discovery:
+#      client:
+#        simple:
+#          instances:
+#            foo-service:
+#              - instanceId: foo1
+#                serviceId: foo-service
+#                host: localhost
+#                port: 9876```
+
+
+# spring.cloud.discovery.client.simple.instances.service1[0].uri=http://s11:8080
+
+
+spring:
+  application:
+    name: demo-springcloud
+
+# https://docs.spring.io/spring-cloud-commons/docs/current/reference/html/appendix.html
+  cloud:
+    discovery:
+      client:
+        simple:
+          instances:
+            data-assets-base-platform:
+              - instanceId: data-assets-base-platform
+                serviceId: data-assets-base-platform
+                host: 10.194.188.76
+                port: 32412
+eureka:
+  instance:
+    instance-id: ${spring.cloud.client.ip-address}:${spring.application.name}:${server.port}
+    status-page-url-path: /swagger-ui.html
+    prefer-ip-address: true
+  client:
+    register-with-eureka: false
+    fetch-registry: false
+    service-url:
+      defaultZone: http://admin:bmsoft@10.194.188.76:31500/eureka
+
+data-manage-platform.ribbon.listOfServers:  http://10.194.188.76:31503
+data-assets-search.ribbon.listOfServers: http://10.194.188.76:32416
+data-unify-query-platform.ribbon.listOfServers: http://10.194.188.76:32600
+data-assets-lineage.ribbon.listOfServers: http://10.194.188.76:32413
+data-oss-service.ribbon.listOfServers: http://10.194.188.76:31400
+dolphinscheduler-platform.ribbon.listOfServers: http://10.194.188.76:30289
+
+
+
